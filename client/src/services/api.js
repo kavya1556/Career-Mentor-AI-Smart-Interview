@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE || 'https://backend-server-smartai.onrender.com/api',
-});
+// Validate env var has a proper http protocol prefix; ignore it if wrong
+const envBase = process.env.REACT_APP_API_BASE || '';
+const baseURL = envBase.startsWith('http')
+    ? envBase
+    : 'https://backend-server-smartai.onrender.com/api';
+
+const api = axios.create({ baseURL });
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
