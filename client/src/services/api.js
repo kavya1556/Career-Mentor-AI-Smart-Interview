@@ -1,7 +1,13 @@
 import axios from 'axios';
 
 // Validate env var has a proper http protocol prefix; ignore it if wrong
-const envBase = process.env.REACT_APP_API_BASE || '';
+let envBase = process.env.REACT_APP_API_BASE || '';
+
+// Automatically append /api if the user forgot it in their environment variable
+if (envBase && !envBase.endsWith('/api')) {
+    envBase = envBase.replace(/\/$/, '') + '/api';
+}
+
 const baseURL = envBase.startsWith('http')
     ? envBase
     : 'https://backend-server-smartai.onrender.com/api';
