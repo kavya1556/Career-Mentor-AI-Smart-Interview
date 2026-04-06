@@ -1,0 +1,11 @@
+flask
+flask-cors
+google-generativeai
+spacy
+pypdf
+python-docx
+sentence-transformers
+torch
+python-dotenv
+gtts
+gunicorn

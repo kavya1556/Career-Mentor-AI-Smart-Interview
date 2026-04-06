@@ -1,0 +1,63 @@
+{
+    "software_engineer": [
+        "Python",
+        "Data Structures",
+        "Algorithms",
+        "REST APIs",
+        "Git",
+        "SQL",
+        "System Design",
+        "Docker",
+        "Testing"
+    ],
+    "data_analyst": [
+        "Python",
+        "SQL",
+        "Excel",
+        "Tableau",
+        "Statistics",
+        "Data Cleaning",
+        "Pandas",
+        "Visualization"
+    ],
+    "ml_engineer": [
+        "Python",
+        "Machine Learning",
+        "Deep Learning",
+        "TensorFlow",
+        "PyTorch",
+        "Feature Engineering",
+        "MLOps",
+        "Docker"
+    ],
+    "product_manager": [
+        "Roadmapping",
+        "User Stories",
+        "Agile",
+        "Stakeholder Management",
+        "Data Analysis",
+        "A/B Testing",
+        "Wireframing"
+    ],
+    "frontend_developer": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "TypeScript",
+        "REST APIs",
+        "Git",
+        "Responsive Design"
+    ],
+    "backend_developer": [
+        "Node.js",
+        "Python",
+        "REST APIs",
+        "SQL",
+        "NoSQL",
+        "Docker",
+        "Git",
+        "System Design",
+        "Authentication"
+    ]
+}
