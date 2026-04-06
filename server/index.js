@@ -32,6 +32,10 @@ app.use("/api/interview", require("./routes/interview.routes"));
 app.use("/api/progress", require("./routes/progress.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 
+// Health check
+app.get("/", (req, res) => res.json({ status: "SmartAI Backend is Live ✓" }));
+app.get("/api/health", (req, res) => res.json({ status: "ok", timestamp: new Date().toISOString() }));
+
 // Serve static assets in production (placeholder)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
