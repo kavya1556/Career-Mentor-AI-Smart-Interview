@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { Mail, Lock, LogIn, ArrowRight, BrainCircuit } from 'lucide-react';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const { login } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await login(email, password);
+            await login(username, password);
             toast.success('Login successful! Welcome back.', {
                 style: {
                     border: '1px solid var(--primary)',
@@ -85,10 +85,10 @@ const Login = () => {
 
                     <form onSubmit={handleSubmit}>
                         <div style={{ marginBottom: '1rem', position: 'relative' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Email Address</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Username</label>
                             <div style={{ position: 'relative' }}>
                                 <Mail size={18} color="var(--text-dim)" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '1rem', opacity: 0.7 }} />
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '1rem', transition: 'all 0.3s', outline: 'none' }} placeholder="pilot@smartai.net" />
+                                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '1rem', transition: 'all 0.3s', outline: 'none' }} placeholder="kavya1556" />
                             </div>
                         </div>
 

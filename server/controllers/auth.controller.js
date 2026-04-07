@@ -3,18 +3,18 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
-    const { name, email, password, role } = req.body;
-    console.log("Registration attempt for:", email);
+    const { username, firstName, lastName, password, role } = req.body;
+    console.log("Registration attempt for:", username);
     try {
-        if (!name || !email || !password) {
-            return res.status(400).json({ msg: "Please enter all fields" });
+        if (!username || !firstName || !password) {
+            return res.status(400).json({ msg: "Please enter all required fields" });
         }
 
-        let student = await Student.findOne({ email });
+        let student = await Student.findOne({ username });
         console.log("Check existing user result:", student ? "Found" : "Not Found");
         if (student) return res.status(400).json({ msg: "User already exists" });
 
-        student = new Student({ name, email, password, role });
+        student = new Student({ username, firstName, lastName, password, role });
         const salt = await bcrypt.genSalt(10);
         student.password = await bcrypt.hash(password, salt);
 
@@ -44,9 +44,9 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
-        let student = await Student.findOne({ email });
+        let student = await Student.findOne({ username });
         if (!student) return res.status(400).json({ msg: "Invalid credentials" });
 
         const isMatch = await bcrypt.compare(password, student.password);
@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
                 console.error("Login JWT Error:", err);
                 return res.status(500).json({ msg: "Error generating token" });
             }
-            res.json({ token, user: { id: student.id, name: student.name, email: student.email, role: student.role } });
+            res.json({ token, user: { id: student.id, username: student.username, firstName: student.firstName, role: student.role } });
         });
     } catch (err) {
         console.error("Login Error:", err);

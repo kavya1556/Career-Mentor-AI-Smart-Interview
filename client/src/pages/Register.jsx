@@ -5,7 +5,12 @@ import toast from 'react-hot-toast';
 import { User, Mail, Lock, UserPlus, ArrowRight, BrainCircuit } from 'lucide-react';
 
 const Register = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ 
+        username: '', 
+        firstName: '', 
+        lastName: '', 
+        password: '' 
+    });
     const [loading, setLoading] = useState(false);
     const { register } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -14,7 +19,12 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await register(formData.name, formData.email, formData.password);
+            await register(
+                formData.username, 
+                formData.firstName, 
+                formData.lastName, 
+                formData.password
+            );
             toast.success('Registration successful!', {
                 style: {
                     border: '1px solid var(--accent)',
@@ -83,19 +93,28 @@ const Register = () => {
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div style={{ marginBottom: '1rem', position: 'relative' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Full Name</label>
-                            <div style={{ position: 'relative' }}>
-                                <User size={18} color="var(--text-dim)" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '1rem', opacity: 0.7 }} />
-                                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '1rem', transition: 'all 0.3s', outline: 'none' }} placeholder="John Doe" />
+                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                            <div style={{ flex: 1 }}>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>First Name</label>
+                                <div style={{ position: 'relative' }}>
+                                    <User size={18} color="var(--text-dim)" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '1rem', opacity: 0.7 }} />
+                                    <input type="text" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '0.9rem', outline: 'none' }} placeholder="John" />
+                                </div>
+                            </div>
+                            <div style={{ flex: 1 }}>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Last Name</label>
+                                <div style={{ position: 'relative' }}>
+                                    <User size={18} color="var(--text-dim)" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '1rem', opacity: 0.7 }} />
+                                    <input type="text" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '0.9rem', outline: 'none' }} placeholder="Doe" />
+                                </div>
                             </div>
                         </div>
 
                         <div style={{ marginBottom: '1rem', position: 'relative' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Email Address</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-dim)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>Username</label>
                             <div style={{ position: 'relative' }}>
                                 <Mail size={18} color="var(--text-dim)" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '1rem', opacity: 0.7 }} />
-                                <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '1rem', transition: 'all 0.3s', outline: 'none' }} placeholder="pilot@smartai.net" />
+                                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} required style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', color: 'white', fontSize: '1rem', transition: 'all 0.3s', outline: 'none' }} placeholder="kavya1556" />
                             </div>
                         </div>
 
