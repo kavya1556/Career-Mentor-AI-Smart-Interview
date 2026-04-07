@@ -36,16 +36,20 @@ app.use("/api/admin", require("./routes/admin.routes"));
 app.get("/api/status", (req, res) => res.json({ status: "SmartAI Backend is Live ✓" }));
 app.get("/api/health", (req, res) => res.json({ status: "ok", timestamp: new Date().toISOString() }));
 
-// Serve static assets in production
-if (process.env.NODE_ENV === "production" || process.env.RENDER) {
-    // Serve static files from the client/build folder
-    // Note: On Render, if Root Directory is 'server', this should be '../client/build'
-    const buildPath = path.join(__dirname, "..", "client", "build");
+// Serve static assets
+const buildPath = path.join(__dirname, "..", "client", "build");
+const fs = require("fs");
+
+if (fs.existsSync(buildPath)) {
+    console.log("Serving frontend from:", buildPath);
     app.use(express.static(buildPath));
-    
     app.get("*", (req, res) => {
         res.sendFile(path.join(buildPath, "index.html"));
     });
+} else {
+    console.log("Frontend build not found at:", buildPath);
+    // Fallback if frontend is not built yet
+    app.get("/", (req, res) => res.json({ status: "Backend Live", message: "Frontend build not found. Run 'npm run build' in the client folder." }));
 }
 
 const PORT = process.env.PORT || 5000;
