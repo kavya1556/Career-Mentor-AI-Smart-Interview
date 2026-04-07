@@ -1,3 +1,4 @@
+// Version: 1.0.1 - Forced Clear Cache
 import axios from 'axios';
 
 const baseURL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
