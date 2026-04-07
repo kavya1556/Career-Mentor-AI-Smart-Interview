@@ -32,15 +32,19 @@ app.use("/api/interview", require("./routes/interview.routes"));
 app.use("/api/progress", require("./routes/progress.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 
-// Health check
-app.get("/", (req, res) => res.json({ status: "SmartAI Backend is Live ✓" }));
+// Health check (moved to /api so it doesn't conflict with frontend)
+app.get("/api/status", (req, res) => res.json({ status: "SmartAI Backend is Live ✓" }));
 app.get("/api/health", (req, res) => res.json({ status: "ok", timestamp: new Date().toISOString() }));
 
-// Serve static assets in production (placeholder)
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+// Serve static assets in production
+if (process.env.NODE_ENV === "production" || process.env.RENDER) {
+    // Serve static files from the client/build folder
+    // Note: On Render, if Root Directory is 'server', this should be '../client/build'
+    const buildPath = path.join(__dirname, "..", "client", "build");
+    app.use(express.static(buildPath));
+    
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+        res.sendFile(path.join(buildPath, "index.html"));
     });
 }
 
